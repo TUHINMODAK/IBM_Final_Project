@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="MovieAPI/MovieAPI.csproj" />
+  <Project Path="MovieUI/movieui.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+</Solution>
