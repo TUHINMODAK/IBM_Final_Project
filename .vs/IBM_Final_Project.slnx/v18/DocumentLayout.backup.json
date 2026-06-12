@@ -1,7 +1,24 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\TuhinModak\\source\\repos\\IBM_Final_Project\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\ArnabPoria\\source\\repos\\IBM_Final_Project\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{886C1DFF-6FFE-8DC8-BB9F-9A68EDD8448A}|MovieUI\\movieui.esproj|c:\\users\\arnabporia\\source\\repos\\ibm_final_project\\movieui\\src\\components\\loginpage.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{886C1DFF-6FFE-8DC8-BB9F-9A68EDD8448A}|MovieUI\\movieui.esproj|solutionrelative:movieui\\src\\components\\loginpage.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{886C1DFF-6FFE-8DC8-BB9F-9A68EDD8448A}|MovieUI\\movieui.esproj|c:\\users\\arnabporia\\source\\repos\\ibm_final_project\\movieui\\src\\main.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{886C1DFF-6FFE-8DC8-BB9F-9A68EDD8448A}|MovieUI\\movieui.esproj|solutionrelative:movieui\\src\\main.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{886C1DFF-6FFE-8DC8-BB9F-9A68EDD8448A}|MovieUI\\movieui.esproj|c:\\users\\arnabporia\\source\\repos\\ibm_final_project\\movieui\\src\\app.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{886C1DFF-6FFE-8DC8-BB9F-9A68EDD8448A}|MovieUI\\movieui.esproj|solutionrelative:movieui\\src\\app.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{886C1DFF-6FFE-8DC8-BB9F-9A68EDD8448A}|MovieUI\\movieui.esproj|c:\\users\\arnabporia\\source\\repos\\ibm_final_project\\movieui\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{886C1DFF-6FFE-8DC8-BB9F-9A68EDD8448A}|MovieUI\\movieui.esproj|solutionrelative:movieui\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +26,64 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "main.jsx",
+              "DocumentMoniker": "C:\\Users\\ArnabPoria\\source\\repos\\IBM_Final_Project\\movieui\\src\\main.jsx",
+              "RelativeDocumentMoniker": "movieui\\src\\main.jsx",
+              "ToolTip": "C:\\Users\\ArnabPoria\\source\\repos\\IBM_Final_Project\\movieui\\src\\main.jsx",
+              "RelativeToolTip": "movieui\\src\\main.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2026-06-12T06:33:28.792Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LoginPage.jsx",
+              "DocumentMoniker": "C:\\Users\\ArnabPoria\\source\\repos\\IBM_Final_Project\\movieui\\src\\Components\\LoginPage.jsx",
+              "RelativeDocumentMoniker": "movieui\\src\\Components\\LoginPage.jsx",
+              "ToolTip": "C:\\Users\\ArnabPoria\\source\\repos\\IBM_Final_Project\\movieui\\src\\Components\\LoginPage.jsx",
+              "RelativeToolTip": "movieui\\src\\Components\\LoginPage.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2026-06-12T06:32:07.117Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "App.jsx",
+              "DocumentMoniker": "C:\\Users\\ArnabPoria\\source\\repos\\IBM_Final_Project\\movieui\\src\\App.jsx",
+              "RelativeDocumentMoniker": "movieui\\src\\App.jsx",
+              "ToolTip": "C:\\Users\\ArnabPoria\\source\\repos\\IBM_Final_Project\\movieui\\src\\App.jsx",
+              "RelativeToolTip": "movieui\\src\\App.jsx",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAABAAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2026-06-12T06:27:34.536Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "package.json",
+              "DocumentMoniker": "C:\\Users\\ArnabPoria\\source\\repos\\IBM_Final_Project\\movieui\\package.json",
+              "RelativeDocumentMoniker": "movieui\\package.json",
+              "ToolTip": "C:\\Users\\ArnabPoria\\source\\repos\\IBM_Final_Project\\movieui\\package.json",
+              "RelativeToolTip": "movieui\\package.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-12T05:32:34.35Z"
             }
           ]
         }

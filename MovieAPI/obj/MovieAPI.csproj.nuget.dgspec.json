@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\TuhinModak\\source\\repos\\IBM_Final_Project\\MovieAPI\\MovieAPI.csproj": {}
+    "C:\\Users\\ArnabPoria\\source\\repos\\IBM_Final_Project\\MovieAPI\\MovieAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\TuhinModak\\source\\repos\\IBM_Final_Project\\MovieAPI\\MovieAPI.csproj": {
+    "C:\\Users\\ArnabPoria\\source\\repos\\IBM_Final_Project\\MovieAPI\\MovieAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\TuhinModak\\source\\repos\\IBM_Final_Project\\MovieAPI\\MovieAPI.csproj",
+        "projectUniqueName": "C:\\Users\\ArnabPoria\\source\\repos\\IBM_Final_Project\\MovieAPI\\MovieAPI.csproj",
         "projectName": "MovieAPI",
-        "projectPath": "C:\\Users\\TuhinModak\\source\\repos\\IBM_Final_Project\\MovieAPI\\MovieAPI.csproj",
-        "packagesPath": "C:\\Users\\TuhinModak\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\TuhinModak\\source\\repos\\IBM_Final_Project\\MovieAPI\\obj\\",
+        "projectPath": "C:\\Users\\ArnabPoria\\source\\repos\\IBM_Final_Project\\MovieAPI\\MovieAPI.csproj",
+        "packagesPath": "C:\\Users\\ArnabPoria\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ArnabPoria\\source\\repos\\IBM_Final_Project\\MovieAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\TuhinModak\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ArnabPoria\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -76,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
