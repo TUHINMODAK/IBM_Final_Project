@@ -1,4 +1,4 @@
-gitignore
+
 # Build folders
 bin/
 obj/
@@ -12,5 +12,43 @@ packages/
 # Environment
 .env
 # OS files
+.DS_Store
+Thumbs.db
+
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Production builds
+/dist
+/build
+
+# Testing & Coverage
+/coverage
+
+# Local environment files (contains secrets!)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor/IDE configs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# System files
 .DS_Store
 Thumbs.db
