@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using MovieAPI.Models;
+
 namespace MovieAPI
 {
     public class Program
@@ -11,7 +14,12 @@ namespace MovieAPI
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+
+            builder.Services.AddDbContext<MovieContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("devdbconn")));
+
             builder.Services.AddOpenApi();
+            builder.Services.AddSwaggerGen();
+
 
             var app = builder.Build();
 
@@ -19,6 +27,8 @@ namespace MovieAPI
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
 
             app.UseAuthorization();
