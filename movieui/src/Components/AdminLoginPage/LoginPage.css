@@ -1,0 +1,28 @@
+.form-control {
+  border-radius: 12px !important;
+}
+
+.input-group-text {
+  border-radius: 12px 0 0 12px !important;
+}
+
+.btn-light:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card {
+  overflow: hidden;
+}
+
+a {
+  transition: 0.3s;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
