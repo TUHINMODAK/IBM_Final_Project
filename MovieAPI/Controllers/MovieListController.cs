@@ -177,8 +177,70 @@ namespace MovieAPI.Controllers
             });
         }
 
+        [HttpGet]
+        [Route("searchMovie")]
+        public async Task<IActionResult> Search(string term)
+        {
+            if (string.IsNullOrWhiteSpace(term))
+            {
+                var allMovies = await _context.Movies.ToListAsync();
+
+                return Ok(new
+                {
+                    message = "All movies",
+                    data = allMovies
+                });
+            }
+
+            var movies = await _context.Movies
+                .Where(m => m.Series_Title.ToLower().Contains(term.ToLower()))
+                .ToListAsync();
+
+            if (movies.Any())
+            {
+                return Ok(new
+                {
+                    message = "Movie found",
+                    data = movies
+                });
+            }
+
+            return NotFound(new
+            {
+                message = "No movies found"
+            });
+        }
 
 
+        [HttpGet]
+        [Route("filterMovies")]
+        public async Task<IActionResult> FilterMovies(string? genre, int? year, double? minRating)
+        {
+            var query = _context.Movies.AsQueryable();
+
+            if (!string.IsNullOrEmpty(genre))
+            {
+                query = query.Where(m => m.Genre.ToLower().Contains(genre.ToLower()) );
+            }
+
+            if (year.HasValue)
+            {
+                query = query.Where(m => m.Released_Year == year);
+            }
+
+            if (minRating.HasValue)
+            {
+                query = query.Where(m => m.IMDB_Rating >= minRating);
+            }
+
+            var movies = await query.ToListAsync();
+
+            return Ok(new
+            {
+                count = movies.Count,
+                data = movies
+            });
+        }
 
     }
 }
