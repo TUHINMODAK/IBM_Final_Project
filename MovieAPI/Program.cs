@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
+using MovieAPI.Models;
 
 namespace MovieAPI
 {
@@ -15,7 +17,12 @@ namespace MovieAPI
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+
+            builder.Services.AddDbContext<MovieContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("devdbconn")));
+
             builder.Services.AddOpenApi();
+            builder.Services.AddSwaggerGen();
+
 
             //For jwt Authentication
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(x =>
@@ -40,6 +47,8 @@ namespace MovieAPI
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
 
             app.UseAuthorization();
