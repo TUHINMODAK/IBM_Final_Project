@@ -34,7 +34,7 @@ namespace MovieAPI
                     ValidateIssuerSigningKey = true,
 
                     ValidIssuer = builder.Configuration["jwt:Issuer"],
-                    ValidAudience = builder.Configuration["jwt : Audiance"],
+                    ValidAudience = builder.Configuration["jwt:Audiance"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["jwt:key"]))
                 };
             });
@@ -52,7 +52,7 @@ namespace MovieAPI
             }
 
             app.UseAuthorization();
-
+            app.UseAuthentication();
 
             app.MapControllers();
 
