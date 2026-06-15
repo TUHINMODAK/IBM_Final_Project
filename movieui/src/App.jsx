@@ -8,6 +8,7 @@ import LoginPage from './Components/AdminLoginPage/LoginPage'
 import AdminDashboard from './Components/Admin_Dashboard/AdminDashboard'
 import Add from './Components/AddMovie/Add'
 import Edit from './Components/EditMovie/Edit'
+import EditMovieWrapper from './Components/Wrapper/EditMovieWrapper'
 
 function App() {
 
@@ -19,7 +20,7 @@ function App() {
           <Route path='/admin-login' element={<LoginPage/>}></Route>
           <Route path="/dashboard" element={<AdminDashboard />} />
           <Route path="/dashboard/add" element={<Add />} />
-          <Route path="/dashboard/edit/:id" element={<Edit />} />
+          <Route path="/dashboard/edit/:id" element={<EditMovieWrapper />} />
         </Routes>
       </BrowserRouter>
     </>
