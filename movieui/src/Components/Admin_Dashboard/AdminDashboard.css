@@ -1,0 +1,55 @@
+.dashboard-container {
+    padding: 15px;
+    background: #f5f5f5;
+    min-height: 100vh;
+}
+
+.dashboard-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 0px;
+}
+
+.dashboard-subtitle {
+    margin-top: 0px;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.1);
+}
+
+.poster {
+    width: 50px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.table {
+    font-size: 14px;
+    background: white;
+}
+
+    .table th {
+        background: #f8f9fa;
+        font-weight: 600;
+    }
+
+    .table td {
+        vertical-align: middle;
+    }
+
+.form-control {
+    width: 300px;
+}
+
+.btn-danger {
+    background: #e50914;
+    border: none;
+}
+
+    .btn-danger:hover {
+        background: #c40812;
+    }

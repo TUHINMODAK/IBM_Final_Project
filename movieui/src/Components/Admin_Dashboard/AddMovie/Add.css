@@ -1,0 +1,83 @@
+body {
+    background: linear-gradient(135deg, #eef7ff, #dff8f4);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.movie-card {
+    margin: auto;
+    width: 100%;
+    max-width: 900px;
+    background: #fff;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.movie-title {
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #0d6efd, #20c997);
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    margin-top: -20px;
+    margin-bottom: 0px;
+}
+
+.form-label {
+    display: block;
+    text-align: left;
+    font-weight: 600;
+    color: #495057;
+}
+
+.form-control {
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid #ced4da;
+}
+
+    .form-control:focus {
+        border-color: #20c997;
+        box-shadow: 0 0 10px rgba(32, 201, 151, 0.3);
+    }
+
+.btn-success {
+    border-radius: 30px;
+    padding: 10px 30px;
+    font-weight: 600;
+}
+
+.btn-outline-danger {
+    border-radius: 30px;
+    padding: 10px 30px;
+    font-weight: 600;
+}
+
+.poster-preview {
+    height: 250px;
+    width: 180px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.header-icon {
+    font-size: 50px;
+    margin-right: 10px;
+}
+
+.form-section {
+    margin-top: 20px;
+}
+
+.text-muted {
+    font-size: 1rem;
+}
