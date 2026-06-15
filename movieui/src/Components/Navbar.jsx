@@ -1,24 +1,13 @@
 import React, { Component } from 'react'
 import SearchOptions from './SearchOptions'
+import { Link } from 'react-router-dom'
 
 export class Navbar extends Component {
+
   render() {
     return (
-      // <div className='row p-3 bg-info'>
-      //   <div className='col'>icon</div>
-        
-      //   <div className='col'>
-      //       movies
-      //       watchlist
-      //   </div>
-      //   <div className='col'>
-      //     <input type="text" />
-      //   </div>
-      //   <div className='col'><a href="" className='btn btn-primary'>Login</a></div>
-        
-      // </div>
 
-      <nav  className="navbar navbar-expand-lg navbar-dark bg-primary px-3 shadow-sm" >
+      <nav className="navbar navbar-expand-lg navbar-dark bg-primary px-3 shadow-sm" >
 
         {/* Brand */}
         <a className="navbar-brand fw-bold" href="/">
@@ -55,10 +44,11 @@ export class Navbar extends Component {
 
           </ul>
 
-          
-           <button className="btn btn-light text-primary fw-semibold" type="submit">
+          <Link to="/admin-login">
+            <button onClick={this.handleLogin} className="btn btn-light text-primary fw-semibold" type="submit">
               Admin Login
             </button>
+          </Link>
 
 
         </div>

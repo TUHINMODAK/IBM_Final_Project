@@ -12,7 +12,7 @@ export class MovieList extends Component {
 
     async componentDidMount(){
         try {
-            const responce=await fetch('http://localhost:5146/api/MovieList/getAllMovies')
+            const responce=await fetch('http://localhost:5146/api/MovieList/getAllMovies?pageNum=1&numOfData=10')
             if(responce.ok){
                 const data=await responce.json();
                 console.log(data.data);

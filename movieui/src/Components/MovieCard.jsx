@@ -19,7 +19,7 @@ export class MovieCard extends Component {
             <h5 className="card-title fw-bold">{name}</h5>
 
             <span className="badge bg-warning text-dark fs-6">
-              ⭐ {rating}
+              ⭐ {rating.toFixed(1)}
             </span>
           </div>
 
