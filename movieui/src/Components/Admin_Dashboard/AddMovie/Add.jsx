@@ -59,7 +59,7 @@ export class Add extends Component {
 
     try {
       const response = await fetch(
-        "http://localhost:5146/api/MovieList/addMovie",
+        "http://localhost:5146/api/MovieList/AddMovie",
         {
           method: "POST",
           headers: {
