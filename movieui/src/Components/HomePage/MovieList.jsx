@@ -32,7 +32,7 @@ export class MovieList extends Component {
                 <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
                     {
                         this.state.movielist.map((data) =>
-                        <MovieCard key={data.id} poster={data.poster_Link} name={data.series_Title} rating={data.imdB_Rating} />
+                        <MovieCard key={data.id} id={data.id} poster={data.poster_Link} name={data.series_Title} rating={data.imdB_Rating} />
                         )
                     }
                 </div>
