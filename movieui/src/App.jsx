@@ -5,6 +5,9 @@ import heroImg from './assets/hero.png'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './Components/HomePage/Home'
 import LoginPage from './Components/AdminLoginPage/LoginPage'
+import AdminDashboard from './Components/Admin_Dashboard/AdminDashboard'
+import Add from './Components/AddMovie/Add'
+import Edit from './Components/EditMovie/Edit'
 
 function App() {
 
@@ -14,6 +17,9 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>}></Route>
           <Route path='/admin-login' element={<LoginPage/>}></Route>
+          <Route path="/dashboard" element={<AdminDashboard />} />
+          <Route path="/dashboard/add" element={<Add />} />
+          <Route path="/dashboard/edit" element={<Edit />} />
         </Routes>
       </BrowserRouter>
     </>
