@@ -1,6 +1,13 @@
-﻿namespace MovieAPI.Model
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MovieAPI.Model
 {
-    public class Class
+    public class UserLogin
     {
+        [Required]
+        public string UserName { get; set; }
+
+        [Required]
+        public string Password { get; set; }
     }
 }
