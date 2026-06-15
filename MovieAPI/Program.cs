@@ -23,6 +23,17 @@ namespace MovieAPI
             builder.Services.AddOpenApi();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowReactApp",
+                    policy =>
+                    {
+                        policy
+                            .WithOrigins("http://localhost:54950") 
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
 
             //For jwt Authentication
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(x =>
@@ -50,7 +61,7 @@ namespace MovieAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseCors("AllowReactApp");
             app.UseAuthorization();
             app.UseAuthentication();
 

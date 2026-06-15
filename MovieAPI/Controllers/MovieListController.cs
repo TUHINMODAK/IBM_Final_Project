@@ -52,9 +52,11 @@ namespace MovieAPI.Controllers
 
         [HttpGet]
         [Route("getAllMovies")]
-        public async Task<IActionResult> GetAllMovies()
+        public async Task<IActionResult> GetAllMovies([FromBody]int pageNum,[FromBody] int numOfData)
         {
-            var movies=await _context.Movies.ToListAsync();
+            int pageNumber = pageNum;
+            int numberOfData = numOfData;
+            var movies=await _context.Movies.Skip((pageNum-1)*numberOfData).Take(numberOfData).ToListAsync();
             return Ok(new
             {
                 message = "Data Fetched Succesfully",
