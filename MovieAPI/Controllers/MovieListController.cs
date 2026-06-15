@@ -52,7 +52,7 @@ namespace MovieAPI.Controllers
 
         [HttpGet]
         [Route("getAllMovies")]
-        public async Task<IActionResult> GetAllMovies([FromBody]int pageNum,[FromBody] int numOfData)
+        public async Task<IActionResult> GetAllMovies([FromQuery]int pageNum,[FromQuery] int numOfData)
         {
             int pageNumber = pageNum;
             int numberOfData = numOfData;
