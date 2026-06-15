@@ -19,7 +19,7 @@ function App() {
           <Route path='/admin-login' element={<LoginPage/>}></Route>
           <Route path="/dashboard" element={<AdminDashboard />} />
           <Route path="/dashboard/add" element={<Add />} />
-          <Route path="/dashboard/edit" element={<Edit />} />
+          <Route path="/dashboard/edit/:id" element={<Edit />} />
         </Routes>
       </BrowserRouter>
     </>

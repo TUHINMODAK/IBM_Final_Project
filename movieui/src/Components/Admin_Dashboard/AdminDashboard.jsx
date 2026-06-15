@@ -1,11 +1,49 @@
 
 import "./AdminDashboard.css";
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import {Navigate,useNavigate } from "react-router-dom";
+import {Link } from "react-router-dom";
 import React, { Component } from 'react'
 
 export class AdminDashboard extends Component {
+    constructor(props) {
+      super(props)
+    
+      this.state = {
+         movielist:[]
+      }
+    }
+    async componentDidMount(){
+        try {
+            const responce= await fetch('http://localhost:5146/api/MovieList/getAllMovies?pageNum=1&numOfData=10')
+            if(responce.ok){
+                    const data=await responce.json();
+                    const movies=data.data;
+                    this.setState({
+                        movielist:movies
+                    })
+                }
+            } catch (error) {
+                console.error(error)
+            }
+    }
 
+    onDeleteClick= async (id)=>{
+        try {
+            const response = await fetch(
+                `http://localhost:5146/api/MovieList/DeleteMovie/${id}`,
+                {
+                    method: "DELETE",
+                });
+            if(response.ok){
+                    const data=await response.json();
+                    console.log(data.message);
+                }
+            
+            } catch (error) {
+                console.error(error)
+            }
+    }
+   
   render() {
     return (
       <div className="container-fluid dashboard-container">
@@ -47,24 +85,36 @@ export class AdminDashboard extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <img src="" alt="" className="poster" />
-                                </td>
-                                <td>Peddi</td>
-                                <td>2026</td>
-                                <td>Action</td>
-                                <td>9.5 ⭐</td>
-                                <td>Bujji Babu</td>
-                                <td>
-                                    <button className="btn btn-link text-dark" onClick={() => navigate("/dashboard/Edit")}>
-                                        <i className="bi bi-pencil-square"></i>
-                                    </button>
-                                    <button className="btn btn-link text-dark">
-                                        <i className="bi bi-trash-fill"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                            
+
+                            {
+                                this.state.movielist.map((movie)=>{
+                                    return (
+                                    <tr key={movie.id}>
+                                        <td>
+                                            <img src={movie.poster_Link} alt="" className="poster" />
+                                        </td>
+                                        <td>{movie.series_Title}</td>
+                                        <td>{movie.released_Year}</td>
+                                        <td>{movie.genre}</td>
+                                        <td>{Number(movie.imdB_Rating).toFixed(2)} ⭐</td>
+                                        <td>{movie.director}</td>
+                                        <td></td>
+                                        <td>
+                                                <Link to={`/dashboard/edit/${movie.id}`}>
+                                            <button className="btn btn-link text-dark" >
+    
+                                                <i className="bi bi-pencil-square"></i>
+                                            </button>
+        </Link>
+                                            <button className="btn btn-link text-dark" onClick={()=>this.onDeleteClick(movie.id)}>
+                                                <i className="bi bi-trash-fill"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    )
+                                })
+                            }
 
                         </tbody>
                     </table>
