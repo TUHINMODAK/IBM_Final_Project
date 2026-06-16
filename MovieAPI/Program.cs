@@ -50,6 +50,7 @@ namespace MovieAPI
                 };
             });
 
+
             builder.Services.AddAuthorization();
 
             var app = builder.Build();

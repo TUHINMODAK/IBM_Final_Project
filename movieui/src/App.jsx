@@ -5,10 +5,14 @@ import heroImg from './assets/hero.png'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './Components/HomePage/Home'
 import LoginPage from './Components/AdminLoginPage/LoginPage'
+import Error from './Components/Error'
 import AdminDashboard from './Components/Admin_Dashboard/AdminDashboard'
-import Add from './Components/Admin_Dashboard/AddMovie/Add'
-import Edit from './Components/Admin_Dashboard/EditMovie/Edit'
-import EditMovieWrapper from './Components/Wrapper/EditMovieWrapper'
+
+import EditMovieWrapper from './Components/Admin_Dashboard/Wrapper/EditMovieWrapper'
+import AddMovieWrapper from './Components/Admin_Dashboard/Wrapper/AddMovieWrapper'
+import DashboardWrapper from './Components/Admin_Dashboard/Wrapper/DashboardWrapper'
+import MovieDatailsWrapper from './Components/Admin_Dashboard/Wrapper/MovieDetailsWrapper'
+
 
 function App() {
 
@@ -18,8 +22,10 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>}></Route>
           <Route path='/admin-login' element={<LoginPage/>}></Route>
-          <Route path="/dashboard" element={<AdminDashboard />} />
-          <Route path="/dashboard/add" element={<Add />} />
+          <Route path="/dashboard" element={<DashboardWrapper />} />
+          <Route path="/dashboard/add" element={<AddMovieWrapper />} />
+          <Route path='/movie/:id' element={<MovieDatailsWrapper/>}></Route>
+          <Route path='/*' element={<Error/>}></Route>
           <Route path="/dashboard/edit/:id" element={<EditMovieWrapper />} />
         </Routes>
       </BrowserRouter>

@@ -23,46 +23,56 @@ namespace MovieAPI.Controllers
         [Authorize]
         public IActionResult AddMovie(MovieList movie)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new
+                {
+                    message = "Invalid Input"
+                });
+            }
+
+            try
             {
                 _context.Movies.Add(movie);
-                int rows = _context.SaveChanges();
-                if (rows > 0)
-                {
-                    return StatusCode(201, new
-                    {
-                        message = "Data Added Successfully",
-                        data = movie
-                    });
-                }
-                else
-                {
-                    return StatusCode(500, new
-                    {
-                        message = "Something went wrong"
-                    });
-                }
+                _context.SaveChanges();
 
-
+                return Created("", new
+                {
+                    message = "Movie added successfully.",
+                    data = movie
+                });
             }
-            return StatusCode(400, new
+            catch (DbUpdateException)
             {
-                message = "Invalid Input",
-                data = ModelState.ValidationState
-            });
+                return Conflict(new
+                {
+                    message = "Movie already exists."
+                });
+            }
         }
 
         [HttpGet]
         [Route("getAllMovies")]
-        public async Task<IActionResult> GetAllMovies([FromQuery]int pageNum,[FromQuery] int numOfData)
+        public async Task<IActionResult> GetAllMovies([FromQuery] int pageNum = 1, [FromQuery] int numOfData = 10)
         {
-            int pageNumber = pageNum;
-            int numberOfData = numOfData;
-            var movies=await _context.Movies.Skip((pageNum-1)*numberOfData).Take(numberOfData).ToListAsync();
+            if (pageNum < 1) pageNum = 1;
+            if (numOfData < 1) numOfData = 10;
+
+            int totalRecords = await _context.Movies.CountAsync();
+
+            var movies = await _context.Movies
+                .Skip((pageNum - 1) * numOfData)
+                .Take(numOfData)
+                .ToListAsync();
+
             return Ok(new
             {
-                message = "Data Fetched Succesfully",
-                data= movies
+                pageNumber = pageNum,
+                pageSize = numOfData,
+                totalRecords,
+                totalPages = (int)Math.Ceiling((double)totalRecords / numOfData),
+                message = "Data fetched successfully",
+                data = movies
             });
         }
 
@@ -219,14 +229,25 @@ namespace MovieAPI.Controllers
 
 
         [HttpGet]
-        [Route("filterMovies")]
-        public async Task<IActionResult> FilterMovies(string? genre, int? year, double? minRating)
+        [Route("movies")]
+        public async Task<IActionResult> GetMovies(
+    [FromQuery] int pageNum = 1,
+    [FromQuery] int numOfData = 10,
+    [FromQuery] string? genre = null,
+    [FromQuery] int? year = null,
+    [FromQuery] double? rating = null,
+    [FromQuery] string? search = null,
+    [FromQuery] string? certificate = null)
         {
+            if (pageNum < 1) pageNum = 1;
+            if (numOfData < 1) numOfData = 12;
+
             var query = _context.Movies.AsQueryable();
 
             if (!string.IsNullOrEmpty(genre))
             {
-                query = query.Where(m => m.Genre.ToLower().Contains(genre.ToLower()) );
+                query = query.Where(m =>
+                    m.Genre.ToLower().Contains(genre.ToLower()));
             }
 
             if (year.HasValue)
@@ -234,15 +255,38 @@ namespace MovieAPI.Controllers
                 query = query.Where(m => m.Released_Year == year);
             }
 
-            if (minRating.HasValue)
+            if (rating.HasValue)
             {
-                query = query.Where(m => m.IMDB_Rating >= minRating);
+                query = query.Where(m => m.IMDB_Rating >= rating);
             }
 
-            var movies = await query.ToListAsync();
+            if (!string.IsNullOrEmpty(certificate))
+            {
+                query = query.Where(m =>
+                    m.Certificate != null &&
+                    m.Certificate.Trim().ToLower().Contains(certificate.Trim().ToLower()));
+            }
+            if (!string.IsNullOrEmpty(search))
+            {
+                query = query.Where(m =>
+                    m.Series_Title.ToLower().Contains(search.ToLower()));
+            }
+
+
+            int totalRecords = await query.CountAsync();
+
+          
+            var movies = await query
+                .Skip((pageNum - 1) * numOfData)
+                .Take(numOfData)
+                .ToListAsync();
 
             return Ok(new
             {
+                pageNumber = pageNum,
+                pageSize = numOfData,
+                totalRecords,
+                totalPages = (int)Math.Ceiling((double)totalRecords / numOfData),
                 count = movies.Count,
                 data = movies
             });
