@@ -6,8 +6,8 @@ export default class LoginPage extends Component {
      super(props)
    
      this.state = {
-        email:"",
-        password:""
+        UserName:"",
+         Password:""
      }
    }
 
@@ -18,9 +18,53 @@ export default class LoginPage extends Component {
     })
    }
 
-   handleLogin=()=>{
-    console.log("loginclick");
-   }
+   
+handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+
+        const response = await fetch(
+            "http://localhost:5146/api/Authentication",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(this.state)
+            }
+        );
+
+        const data = await response.json();
+
+        if (response.ok) {
+
+            // Store JWT Token
+            localStorage.setItem("token", data.token);
+
+            // Clear form
+            this.setState({
+                UserName: "",
+                Password: ""
+            });
+
+            alert("Login Successful");
+
+            console.log(data.token);
+
+        } else {
+
+            alert(data.message || "Login Failed");
+        }
+
+    } catch (error) {
+
+        console.log(error);
+        alert("Server Error");
+    }
+};
+
+
 
   render() {
    
@@ -31,8 +75,8 @@ export default class LoginPage extends Component {
           background:
             "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         }}
-      >
-        <div className="container">
+        >
+            <form className="container" method='POST' onSubmit={this.handleLogin}>
           <div className="row justify-content-center">
             <div className="col-md-6 col-lg-5">
               <div
@@ -69,7 +113,7 @@ export default class LoginPage extends Component {
                       className="form-control border-0 py-3 "
                       placeholder="Username or Email"
                       onChange={this.handleChange}
-                      name="email"
+                                        name="UserName"
                     />
                   </div>
 
@@ -80,7 +124,7 @@ export default class LoginPage extends Component {
                       type="password"
                       className="form-control border-0 py-3"
                       placeholder="Password"
-                      name="password"
+                                        name="Password"
                       onChange={this.handleChange}
                     />
                   </div>
@@ -96,7 +140,7 @@ export default class LoginPage extends Component {
 
                   {/* Login Button */}
                   <button
-                    onClick={this.handleLogin}
+                   
                     className="btn btn-light w-100 py-3 fw-bolder "
                     style={{
                       borderRadius: "12px",
@@ -106,7 +150,7 @@ export default class LoginPage extends Component {
                     Login
                   </button>
 
-
+                 
                   <div className="mt-4">
                     <small className="text-light">
                       © 2026 Admin Portal
@@ -116,7 +160,7 @@ export default class LoginPage extends Component {
               </div>
             </div>
           </div>
-        </div>
+          </form>
       </section>
     );
   }
