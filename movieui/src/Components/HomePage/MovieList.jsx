@@ -12,7 +12,7 @@ export class MovieList extends Component {
 
     async componentDidMount(){
         try {
-            const responce=await fetch('http://localhost:5146/api/MovieList/getAllMovies')
+            const responce=await fetch('http://localhost:5146/api/MovieList/getAllMovies?pageNum=1&numOfData=10')
             if(responce.ok){
                 const data=await responce.json();
                 console.log(data.data);
@@ -32,7 +32,7 @@ export class MovieList extends Component {
                 <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
                     {
                         this.state.movielist.map((data) =>
-                        <MovieCard key={data.id} poster={data.poster_Link} name={data.series_Title} rating={data.imdB_Rating} />
+                        <MovieCard key={data.id} id={data.id} poster={data.poster_Link} name={data.series_Title} rating={data.imdB_Rating} />
                         )
                     }
                 </div>
