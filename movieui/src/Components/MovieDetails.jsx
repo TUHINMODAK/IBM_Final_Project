@@ -6,14 +6,15 @@ export class MovieDetails extends Component {
 
 
         this.state = {
-            id: window.location.pathname.split('/')[2],
             movie: {}
         }
     }
 
     async componentDidMount() {
+        const { id } = this.props.params;
+        console.log(id);
         try {
-            const responce = await fetch(`http://localhost:5146/api/MovieList/getMovieById/${this.state.id}`)
+            const responce = await fetch(`http://localhost:5146/api/MovieList/getMovieById/${id}`)
             if (responce.ok) {
                 const data = await responce.json();
                 console.log(data.data);
