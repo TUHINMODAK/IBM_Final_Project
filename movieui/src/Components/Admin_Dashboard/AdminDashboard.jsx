@@ -27,21 +27,32 @@ export class AdminDashboard extends Component {
             }
     }
 
-    onDeleteClick= async (id)=>{
+    onDeleteClick = async (id) => {
         try {
             const response = await fetch(
                 `http://localhost:5146/api/MovieList/DeleteMovie/${id}`,
                 {
                     method: "DELETE",
-                });
-            if(response.ok){
-                    const data=await response.json();
-                    console.log(data.message);
                 }
-            
-            } catch (error) {
-                console.error(error)
+            );
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data.message);
+
+                this.setState((prevState) => ({
+                    movielist: prevState.movielist.filter(
+                        (movie) => movie.id !== id
+                    )
+                }));
             }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    handleAddClk=()=>{
+        this.props.navigate("/dashboard/add")
     }
    
   render() {
@@ -55,7 +66,7 @@ export class AdminDashboard extends Component {
                 </div>
                 <br />
                 <div className="d-flex align-items-center">
-                    <button className="btn btn-success me-3" onClick={() => navigate("/dashboard/Add")}>
+                    <button className="btn btn-success me-3" onClick={this.handleAddClk}>
                         <i className="bi bi-plus-circle me-2"></i>Add Movie</button>
                     <button className="btn btn-primary">
                         <i className="bi bi-plus-circle me-2"></i>Logout</button>
@@ -84,7 +95,12 @@ export class AdminDashboard extends Component {
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        {this.state.movielist.length==0?(<tbody><tr>
+                                <td colSpan="7" className="text-center py-4 text-muted">
+                                    🎬 No movies found
+                                </td>
+                                </tr></tbody>
+                            ):(<tbody>
                             
 
                             {
@@ -101,12 +117,12 @@ export class AdminDashboard extends Component {
                                         <td>{movie.director}</td>
                                         <td></td>
                                         <td>
-                                                <Link to={`/dashboard/edit/${movie.id}`}>
-                                            <button className="btn btn-link text-dark" >
-    
-                                                <i className="bi bi-pencil-square"></i>
-                                            </button>
-        </Link>
+                                            <Link to={`/dashboard/edit/${movie.id}`}>
+                                                <button className="btn btn-link text-dark" >
+        
+                                                    <i className="bi bi-pencil-square"></i>
+                                                </button>
+                                            </Link>
                                             <button className="btn btn-link text-dark" onClick={()=>this.onDeleteClick(movie.id)}>
                                                 <i className="bi bi-trash-fill"></i>
                                             </button>
@@ -116,22 +132,20 @@ export class AdminDashboard extends Component {
                                 })
                             }
 
-                        </tbody>
+                        </tbody>)}
                     </table>
                     {/* Pagination */}
-                    <nav className="mt-4">
+                    <nav aria-label="...">
                         <ul className="pagination justify-content-center">
+                            <li className="page-item"><a href="#" className="page-link">Previous</a></li>
+                            <li className="page-item"><a className="page-link" href="#">1</a></li>
                             <li className="page-item active">
-                                <a className="page-link">1</a>
+                            <a className="page-link" href="#" aria-current="page">2</a>
                             </li>
-                            <li className="page-item">
-                                <a className="page-link">2</a>
-                            </li>
-                            <li className="page-item">
-                                <a className="page-link">3</a>
-                            </li>
+                            <li className="page-item"><a className="page-link" href="#">3</a></li>
+                            <li className="page-item"><a className="page-link" href="#">Next</a></li>
                         </ul>
-                    </nav>
+                        </nav>
                 </div>
             </div>
         </div>

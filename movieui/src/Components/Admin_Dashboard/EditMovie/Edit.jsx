@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Edit.css";
 import InputFields from "../InputFields";
+import { Link } from "react-router-dom";
 
 export class Edit extends Component {
   constructor(props) {
@@ -89,7 +90,8 @@ export class Edit extends Component {
 
       if (response.ok) {
         alert("Movie updated successfully!");
-        console.log(result);
+        // console.log(result);
+        this.props.navigate("/dashboard");
       } else {
         alert("Failed to update movie.");
       }
@@ -99,18 +101,7 @@ export class Edit extends Component {
   };
 
   handleReset = () => {
-    this.setState({
-      title: "",
-      genre: "",
-      year: "",
-      posterUrl: "",
-      director: "",
-      overview: "",
-      certificate: "",
-      runtime: "",
-      rating: "",
-      no_of_Votes: "",
-    });
+    
   };
 
   render() {
@@ -132,13 +123,13 @@ export class Edit extends Component {
             />
 
             <div className="text-center mt-5">
-              <button
+              <Link to={"/dashboard"}><button
                 type="button"
                 className="btn btn-outline-danger me-3 px-4"
-                onClick={this.handleReset}
+                onClick={this.handleCancel}
               >
-                Reset
-              </button>
+                Cancel
+              </button></Link>
 
               <button
                 type="submit"

@@ -8,9 +8,11 @@ import LoginPage from './Components/AdminLoginPage/LoginPage'
 import MovieDetails from './Components/MovieDetails'
 import Error from './Components/Error'
 import AdminDashboard from './Components/Admin_Dashboard/AdminDashboard'
-import Add from './Components/Admin_Dashboard/AddMovie/Add'
-import Edit from './Components/Admin_Dashboard/EditMovie/Edit'
-import EditMovieWrapper from './Components/Wrapper/EditMovieWrapper'
+
+import EditMovieWrapper from './Components/Admin_Dashboard/Wrapper/EditMovieWrapper'
+import AddMovieWrapper from './Components/Admin_Dashboard/Wrapper/AddMovieWrapper'
+import DashboardWrapper from './Components/Admin_Dashboard/Wrapper/DashboardWrapper'
+
 
 function App() {
 
@@ -20,6 +22,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>}></Route>
           <Route path='/admin-login' element={<LoginPage/>}></Route>
+          <Route path="/dashboard" element={<DashboardWrapper />} />
+          <Route path="/dashboard/add" element={<AddMovieWrapper />} />
           <Route path='/movie/:id' element={<MovieDetails/>}></Route>
           <Route path='/*' element={<Error/>}></Route>
           <Route path="/dashboard" element={<AdminDashboard />} />

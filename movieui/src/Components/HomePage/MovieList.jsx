@@ -29,6 +29,20 @@ export class MovieList extends Component {
         
         return (
             <div className="container mt-4">
+                {this.state.movielist.length==0?
+                    <div className="px-100">
+                                    🎬 No movies found
+                                </div>:
+                                <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                    
+                        
+                        {this.state.movielist.map((data) =>
+                            <MovieCard key={data.id} poster={data.poster_Link} name={data.series_Title} rating={data.imdB_Rating} />
+                            )
+                        }
+                    </div>
+                }           
+                
                 <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
                     {
                         this.state.movielist.map((data) =>
