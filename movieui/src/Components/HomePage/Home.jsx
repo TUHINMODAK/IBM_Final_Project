@@ -16,6 +16,9 @@ export default class Home extends Component {
   componentDidMount() {
     this.fetchMovies()
   }
+   handleSearch = (param) => {
+    this.fetchMovies(param);
+  };
 
   fetchMovies = async (params = new URLSearchParams()) => {
     try {
@@ -54,7 +57,7 @@ export default class Home extends Component {
     return (
       <div>
         <Navbar />
-        <SearchOptions />
+        <SearchOptions onSearch={this.handleSearch} />
         <FilterSec onFilter={this.handleFilter} />
 
         <MovieList movielist={this.state.movielist} />
