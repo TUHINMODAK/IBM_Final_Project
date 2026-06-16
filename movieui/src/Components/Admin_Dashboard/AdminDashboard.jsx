@@ -95,7 +95,12 @@ export class AdminDashboard extends Component {
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        {this.state.movielist.length==0?(<tbody><tr>
+                                <td colSpan="7" className="text-center py-4 text-muted">
+                                    🎬 No movies found
+                                </td>
+                                </tr></tbody>
+                            ):(<tbody>
                             
 
                             {
@@ -112,12 +117,12 @@ export class AdminDashboard extends Component {
                                         <td>{movie.director}</td>
                                         <td></td>
                                         <td>
-                                                <Link to={`/dashboard/edit/${movie.id}`}>
-                                            <button className="btn btn-link text-dark" >
-    
-                                                <i className="bi bi-pencil-square"></i>
-                                            </button>
-        </Link>
+                                            <Link to={`/dashboard/edit/${movie.id}`}>
+                                                <button className="btn btn-link text-dark" >
+        
+                                                    <i className="bi bi-pencil-square"></i>
+                                                </button>
+                                            </Link>
                                             <button className="btn btn-link text-dark" onClick={()=>this.onDeleteClick(movie.id)}>
                                                 <i className="bi bi-trash-fill"></i>
                                             </button>
@@ -127,7 +132,7 @@ export class AdminDashboard extends Component {
                                 })
                             }
 
-                        </tbody>
+                        </tbody>)}
                     </table>
                     {/* Pagination */}
                     <nav className="mt-4">

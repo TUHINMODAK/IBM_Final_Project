@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { Edit } from "../Edit";
+import { Edit } from "../EditMovie/Edit";
 
 export default function EditMovieWrapper() {
   const params = useParams();

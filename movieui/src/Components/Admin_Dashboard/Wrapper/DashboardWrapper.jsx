@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
-import Add from "../../AddMovie/Add";
-import AdminDashboard from "../../AdminDashboard";
+import Add from "../AddMovie/Add";
+import AdminDashboard from "../AdminDashboard";
 
 export default function DashboardWrapper() {
   const params = useParams();

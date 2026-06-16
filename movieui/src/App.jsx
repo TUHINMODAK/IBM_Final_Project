@@ -7,9 +7,9 @@ import Home from './Components/HomePage/Home'
 import LoginPage from './Components/AdminLoginPage/LoginPage'
 import AdminDashboard from './Components/Admin_Dashboard/AdminDashboard'
 
-import EditMovieWrapper from './Components/Admin_Dashboard/EditMovie/Wrapper/EditMovieWrapper'
-import AddMovieWrapper from './Components/Admin_Dashboard/EditMovie/Wrapper/AddMovieWrapper'
-import DashboardWrapper from './Components/Admin_Dashboard/EditMovie/Wrapper/DashboardWrapper'
+import EditMovieWrapper from './Components/Admin_Dashboard/Wrapper/EditMovieWrapper'
+import AddMovieWrapper from './Components/Admin_Dashboard/Wrapper/AddMovieWrapper'
+import DashboardWrapper from './Components/Admin_Dashboard/Wrapper/DashboardWrapper'
 
 
 function App() {
