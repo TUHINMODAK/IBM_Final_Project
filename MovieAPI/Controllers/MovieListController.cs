@@ -51,30 +51,7 @@ namespace MovieAPI.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("getAllMovies")]
-        public async Task<IActionResult> GetAllMovies([FromQuery] int pageNum = 1, [FromQuery] int numOfData = 10)
-        {
-            if (pageNum < 1) pageNum = 1;
-            if (numOfData < 1) numOfData = 10;
-
-            int totalRecords = await _context.Movies.CountAsync();
-
-            var movies = await _context.Movies
-                .Skip((pageNum - 1) * numOfData)
-                .Take(numOfData)
-                .ToListAsync();
-
-            return Ok(new
-            {
-                pageNumber = pageNum,
-                pageSize = numOfData,
-                totalRecords,
-                totalPages = (int)Math.Ceiling((double)totalRecords / numOfData),
-                message = "Data fetched successfully",
-                data = movies
-            });
-        }
+        
 
         [HttpGet]
         [Route("getMovieById/{id}")]
@@ -232,7 +209,7 @@ namespace MovieAPI.Controllers
         [Route("movies")]
         public async Task<IActionResult> GetMovies(
     [FromQuery] int pageNum = 1,
-    [FromQuery] int numOfData = 10,
+    [FromQuery] int numOfData = 12,
     [FromQuery] string? genre = null,
     [FromQuery] int? year = null,
     [FromQuery] double? rating = null,
