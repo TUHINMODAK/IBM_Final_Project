@@ -27,21 +27,32 @@ export class AdminDashboard extends Component {
             }
     }
 
-    onDeleteClick= async (id)=>{
+    onDeleteClick = async (id) => {
         try {
             const response = await fetch(
                 `http://localhost:5146/api/MovieList/DeleteMovie/${id}`,
                 {
                     method: "DELETE",
-                });
-            if(response.ok){
-                    const data=await response.json();
-                    console.log(data.message);
                 }
-            
-            } catch (error) {
-                console.error(error)
+            );
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data.message);
+
+                this.setState((prevState) => ({
+                    movielist: prevState.movielist.filter(
+                        (movie) => movie.id !== id
+                    )
+                }));
             }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    handleAddClk=()=>{
+        this.props.navigate("/dashboard/add")
     }
    
   render() {
@@ -55,7 +66,7 @@ export class AdminDashboard extends Component {
                 </div>
                 <br />
                 <div className="d-flex align-items-center">
-                    <button className="btn btn-success me-3" onClick={() => navigate("/dashboard/Add")}>
+                    <button className="btn btn-success me-3" onClick={this.handleAddClk}>
                         <i className="bi bi-plus-circle me-2"></i>Add Movie</button>
                     <button className="btn btn-primary">
                         <i className="bi bi-plus-circle me-2"></i>Logout</button>
