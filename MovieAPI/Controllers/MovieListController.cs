@@ -23,46 +23,56 @@ namespace MovieAPI.Controllers
         [Authorize]
         public IActionResult AddMovie(MovieList movie)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new
+                {
+                    message = "Invalid Input"
+                });
+            }
+
+            try
             {
                 _context.Movies.Add(movie);
-                int rows = _context.SaveChanges();
-                if (rows > 0)
-                {
-                    return StatusCode(201, new
-                    {
-                        message = "Data Added Successfully",
-                        data = movie
-                    });
-                }
-                else
-                {
-                    return StatusCode(500, new
-                    {
-                        message = "Something went wrong"
-                    });
-                }
+                _context.SaveChanges();
 
-
+                return Created("", new
+                {
+                    message = "Movie added successfully.",
+                    data = movie
+                });
             }
-            return StatusCode(400, new
+            catch (DbUpdateException)
             {
-                message = "Invalid Input",
-                data = ModelState.ValidationState
-            });
+                return Conflict(new
+                {
+                    message = "Movie already exists."
+                });
+            }
         }
 
         [HttpGet]
         [Route("getAllMovies")]
-        public async Task<IActionResult> GetAllMovies([FromQuery]int pageNum,[FromQuery] int numOfData)
+        public async Task<IActionResult> GetAllMovies([FromQuery] int pageNum = 1, [FromQuery] int numOfData = 10)
         {
-            int pageNumber = pageNum;
-            int numberOfData = numOfData;
-            var movies=await _context.Movies.Skip((pageNum-1)*numberOfData).Take(numberOfData).ToListAsync();
+            if (pageNum < 1) pageNum = 1;
+            if (numOfData < 1) numOfData = 10;
+
+            int totalRecords = await _context.Movies.CountAsync();
+
+            var movies = await _context.Movies
+                .Skip((pageNum - 1) * numOfData)
+                .Take(numOfData)
+                .ToListAsync();
+
             return Ok(new
             {
-                message = "Data Fetched Succesfully",
-                data= movies
+                pageNumber = pageNum,
+                pageSize = numOfData,
+                totalRecords,
+                totalPages = (int)Math.Ceiling((double)totalRecords / numOfData),
+                message = "Data fetched successfully",
+                data = movies
             });
         }
 

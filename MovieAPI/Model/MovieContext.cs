@@ -12,5 +12,18 @@ namespace MovieAPI.Models
 
         public DbSet<MovieList> Movies { get; set; }
         public DbSet<MovieLogin> MoviesLogin { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<MovieList>()
+                .HasIndex(m => new
+                {
+                    m.Series_Title,
+                    m.Released_Year,
+                    m.Director
+                })
+                .IsUnique();
+        }
     }
 }
