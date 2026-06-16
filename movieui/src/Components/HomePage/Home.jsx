@@ -9,7 +9,7 @@ export default class Home extends Component {
   state = {
     movielist: [],
     pageNumber: 1,
-    pageSize: 10,
+    pageSize: 12,
     totalPages: 0
   }
 
