@@ -235,7 +235,8 @@ namespace MovieAPI.Controllers
     [FromQuery] int numOfData = 10,
     [FromQuery] string? genre = null,
     [FromQuery] int? year = null,
-    [FromQuery] double? minRating = null,
+    [FromQuery] double? rating = null,
+    [FromQuery] string? search = null,
     [FromQuery] string? certificate = null)
         {
             if (pageNum < 1) pageNum = 1;
@@ -254,9 +255,9 @@ namespace MovieAPI.Controllers
                 query = query.Where(m => m.Released_Year == year);
             }
 
-            if (minRating.HasValue)
+            if (rating.HasValue)
             {
-                query = query.Where(m => m.IMDB_Rating >= minRating);
+                query = query.Where(m => m.IMDB_Rating >= rating);
             }
 
             if (!string.IsNullOrEmpty(certificate))
@@ -265,8 +266,13 @@ namespace MovieAPI.Controllers
                     m.Certificate != null &&
                     m.Certificate.Trim().ToLower().Contains(certificate.Trim().ToLower()));
             }
+            if (!string.IsNullOrEmpty(search))
+            {
+                query = query.Where(m =>
+                    m.Series_Title.ToLower().Contains(search.ToLower()));
+            }
 
-            
+
             int totalRecords = await query.CountAsync();
 
           

@@ -6,7 +6,8 @@ import FilterSec from '../FilterSec'
 
 export default class Home extends Component {
   state = {
-    movielist: []
+    movielist: [],
+    filters: {}
   }
 
   componentDidMount() {
@@ -20,18 +21,13 @@ export default class Home extends Component {
 
       const response = await fetch(url)
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch movies')
-      }
-
       const data = await response.json()
 
       this.setState({
         movielist: data.data || []
       })
     } catch (error) {
-      console.error('Error fetching movies:', error)
-      this.setState({ movielist: [] })
+      console.error(error)
     }
   }
 
@@ -39,12 +35,22 @@ export default class Home extends Component {
     this.fetchMovies(params)
   }
 
+  handleSearch = (params) => {
+    this.fetchMovies(params)
+  }
+
   render() {
     return (
       <div>
         <Navbar />
-        <SearchOptions />
+
+        {/* SEARCH */}
+        <SearchOptions onSearch={this.handleSearch} />
+
+        {/* FILTERS */}
         <FilterSec onFilter={this.handleFilter} />
+
+        {/* MOVIES */}
         <MovieList movielist={this.state.movielist} />
       </div>
     )
