@@ -5,7 +5,7 @@ export class Dropdown extends Component {
       super(props)
         
       this.state = {
-         value:""
+         
       }
     }
 
@@ -13,7 +13,7 @@ export class Dropdown extends Component {
         this.setState({
             value:e.target.value
         });
-        this.props.onSelectValue(e.target.value);
+        this.props.onSelectValue(this.props.placeholder,e.target.value);
         
     }
   render() {

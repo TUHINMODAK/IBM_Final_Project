@@ -1,11 +1,36 @@
-import { Dropdown } from './Dropdown'
 import React, { Component } from 'react'
+import { Dropdown } from './Dropdown'
 import './FilterSec.css'
 
 export default class FilterSec extends Component {
-  handleGenreValue = (type, value) => {
-    console.log(type, value);
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      genre: '',
+      year: '',
+      rating: '',
+      certificate: ''
+    }
   }
+
+  handleReturnValue = (name, value) => {
+    this.setState({
+      [name.toLowerCase()]: value
+    })
+  }
+
+  handleSubmit = () => {
+    const params = new URLSearchParams()
+
+    if (this.state.genre) params.append('genre', this.state.genre)
+    if (this.state.year) params.append('year', this.state.year)
+    if (this.state.rating) params.append('rating', this.state.rating)
+    if (this.state.certificate) params.append('certificate', this.state.certificate)
+
+    this.props.onFilter(params)
+  }
+
   render() {
     const movieGenres = [
       { value: "action", name: "Action" },
@@ -13,95 +38,79 @@ export default class FilterSec extends Component {
       { value: "animation", name: "Animation" },
       { value: "comedy", name: "Comedy" },
       { value: "crime", name: "Crime" },
-      { value: "documentary", name: "Documentary" },
       { value: "drama", name: "Drama" },
-      { value: "family", name: "Family" },
-      { value: "fantasy", name: "Fantasy" },
-      { value: "history", name: "History" },
       { value: "horror", name: "Horror" },
-      { value: "music", name: "Music" },
-      { value: "mystery", name: "Mystery" },
       { value: "romance", name: "Romance" },
-      { value: "science-fiction", name: "Science Fiction" },
-      { value: "tv-movie", name: "TV Movie" },
-      { value: "thriller", name: "Thriller" },
-      { value: "war", name: "War" },
-      { value: "western", name: "Western" }
-    ];
+      { value: "thriller", name: "Thriller" }
+    ]
 
-    const years = [];
-
-    for (let index = 1920; index <= 2020; index++) {
-      years.push({
-        value: index,
-        name: index.toString()
-      });
+    const years = []
+    for (let i = 1920; i <= 2020; i++) {
+      years.push({ value: i, name: String(i) })
     }
 
-    const rating = [];
-
-    for (let index = 1; index <= 10; index++) {
-      rating.push({
-        value: index,
-        name: index.toString()
-      });
+    const rating = []
+    for (let i = 1; i <= 10; i++) {
+      rating.push({ value: i, name: String(i) })
     }
 
     const certificate = [
-      { "value": "16", "name": "16" },
-      { "value": "A", "name": "A" },
-      { "value": "Approved", "name": "Approved" },
-      { "value": "G", "name": "G" },
-      { "value": "GP", "name": "GP" },
-      { "value": "Passed", "name": "Passed" },
-      { "value": "PG", "name": "PG" },
-      { "value": "PG-13", "name": "PG-13" },
-      { "value": "R", "name": "R" },
-      { "value": "TV-14", "name": "TV-14" },
-      { "value": "TV-MA", "name": "TV-MA" },
-      { "value": "TV-PG", "name": "TV-PG" },
-      { "value": "U", "name": "U" },
-      { "value": "U/A", "name": "U/A" },
-      { "value": "UA", "name": "UA" },
-      { "value": "Unrated", "name": "Unrated" }
-    ]
-
-    const dropDowns = [
-      { value: movieGenres, name: "Genre" },
-      { value: years, name: "Year" },
-      { value: rating, name: "Rating" },
-      { value: certificate, name: "Certificate" }
+      { value: "U", name: "U" },
+      { value: "UA", name: "UA" },
+      { value: "A", name: "A" },
+      { value: "PG-13", name: "PG-13" },
+      { value: "R", name: "R" },
+      { value: "TV-MA", name: "TV-MA" }
     ]
 
     return (
-      <div className='row align-items-center border p-2'>
-        {/* {
-          dropDowns.map((data, ind) => {
-            return (
-              <div key={ind} className='col'>
-                <Dropdown options={data.value} placeholder={data.name} label={data.value} onSelectValue={(value) => this.handleGenreValue(data.name, value)} />
-              </div>
-            )
-          })
-        } */}
+      <div className="row align-items-center border p-2">
 
-        <div className='col'>
-          <Dropdown options={movieGenres} placeholder="Genre" label="Genre" onSelectValue={this.handleGenreValue} />
+        <div className="col">
+          <Dropdown
+            options={movieGenres}
+            placeholder="Genre"
+            label="Genre"
+            onSelectValue={this.handleReturnValue}
+          />
         </div>
-        <div className='col'>
-          <Dropdown options={years} placeholder="Year" label="Year" onSelectValue={this.handleGenreValue} />
+
+        <div className="col">
+          <Dropdown
+            options={years}
+            placeholder="Year"
+            label="Year"
+            onSelectValue={this.handleReturnValue}
+          />
         </div>
-        <div className='col'>
-          <Dropdown options={rating} placeholder="Rating" label="Rating" onSelectValue={this.handleGenreValue} />
+
+        <div className="col">
+          <Dropdown
+            options={rating}
+            placeholder="Rating"
+            label="Rating"
+            onSelectValue={this.handleReturnValue}
+          />
         </div>
-        <div className='col'>
-          <Dropdown options={certificate} placeholder="Certificate" label="Certificate" onSelectValue={this.handleGenreValue} />
+
+        <div className="col">
+          <Dropdown
+            options={certificate}
+            placeholder="Certificate"
+            label="Certificate"
+            onSelectValue={this.handleReturnValue}
+          />
         </div>
+
         <div className="col d-flex justify-content-center align-items-end">
-          <button className="btn btn-primary px-4 applybtn" type="button">
+          <button
+            className="btn btn-primary px-4 applybtn"
+            onClick={this.handleSubmit}
+          >
             Apply Filter
           </button>
         </div>
+
       </div>
     )
   }
