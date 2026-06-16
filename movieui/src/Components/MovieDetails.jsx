@@ -77,9 +77,9 @@ export class MovieDetails extends Component {
                         {/* Poster */}
                         <div className="col-md-4 mb-4">
                             <img
-                                src={this.state.movie.poster_Link}
-                                alt={this.state.movie.series_Title}
-                                className="img-fluid rounded shadow"
+                            src={this.state.movie.poster_Link}
+                            alt={this.state.movie.series_Title}
+                            className="img-fluid rounded shadow w-75"
                             />
                         </div>
 
