@@ -27,13 +27,25 @@ export class AdminDashboard extends Component {
             }
     }
 
-    onDeleteClick= async (id)=>{
+    handleLogout = () => {
+        localStorage.removeItem("token");
+        window.location.href = "/admin-login";
+    }
+
+    onDeleteClick = async (id) => {
+        const token = localStorage.getItem("token");
         try {
             const response = await fetch(
                 `http://localhost:5146/api/MovieList/DeleteMovie/${id}`,
                 {
                     method: "DELETE",
-                });
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                },
+
+            );
             if(response.ok){
                     const data=await response.json();
                     console.log(data.message);
@@ -43,6 +55,7 @@ export class AdminDashboard extends Component {
                 console.error(error)
             }
     }
+
    
   render() {
     return (
@@ -55,9 +68,9 @@ export class AdminDashboard extends Component {
                 </div>
                 <br />
                 <div className="d-flex align-items-center">
-                    <button className="btn btn-success me-3" onClick={() => navigate("/dashboard/Add")}>
+                    <button className="btn btn-success me-3" onClick={() => window.location.href = "/dashboard/add"}>
                         <i className="bi bi-plus-circle me-2"></i>Add Movie</button>
-                    <button className="btn btn-primary">
+                    <button className="btn btn-primary" onClick={ this.handleLogout}>
                         <i className="bi bi-plus-circle me-2"></i>Logout</button>
                 </div>
                 <br />

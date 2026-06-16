@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import InputFields from "../InputFields";
 import "./Add.css";
 
 export class Add extends Component {
+   
   constructor(props) {
     super(props);
 
@@ -43,6 +44,8 @@ export class Add extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
+      const token = localStorage.getItem("token");
+      console.log('Received Token:',token)
 
     const movie = {
       series_Title: this.state.title,
@@ -63,7 +66,8 @@ export class Add extends Component {
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
           },
           body: JSON.stringify(movie),
         }

@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import SearchOptions from './SearchOptions'
+import { Component } from 'react'
+import { Link } from 'react-router-dom';
 
 export class Navbar extends Component {
   render() {
@@ -56,9 +56,12 @@ export class Navbar extends Component {
           </ul>
 
           
-           <button className="btn btn-light text-primary fw-semibold" type="submit">
-              Admin Login
-            </button>
+                <Link
+                    to="/admin-login"
+                    className="btn btn-light text-primary fw-semibold"
+                >
+                    Admin Login
+                </Link>
 
 
         </div>
