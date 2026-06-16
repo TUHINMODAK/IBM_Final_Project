@@ -54,7 +54,7 @@ this.state.searchTerm
 
   handleLogout = () => {
     localStorage.removeItem("token");
-    window.location.href = "/admin-login";
+    window.location.href = "/";
   };
 
   handleAddClk = () => {

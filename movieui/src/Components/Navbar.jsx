@@ -12,7 +12,7 @@ export class Navbar extends Component {
 
         {/* Brand */}
         <a className="navbar-brand fw-bold" href="/">
-          Navbar
+          MovieMatrix
         </a>
 
         {/* Toggle button */}
