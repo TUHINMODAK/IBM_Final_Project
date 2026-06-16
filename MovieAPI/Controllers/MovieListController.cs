@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MovieAPI.Model;
@@ -19,6 +20,7 @@ namespace MovieAPI.Controllers
 
         [HttpPost]
         [Route("AddMovie")]
+        [Authorize]
         public IActionResult AddMovie(MovieList movie)
         {
             if (!ModelState.IsValid)
@@ -103,6 +105,7 @@ namespace MovieAPI.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         [Route("updateMovieById/{id}")]
         public IActionResult UpdateMovieById([FromRoute] int id, [FromBody]  MovieList movie)
         {
@@ -159,6 +162,7 @@ namespace MovieAPI.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         [Route("DeleteMovie/{id}")]
         public IActionResult DeleteMovie(int id)
         {
