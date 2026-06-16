@@ -170,40 +170,6 @@ namespace MovieAPI.Controllers
             });
         }
 
-        //[HttpGet]
-        //[Route("searchMovie")]
-        //public async Task<IActionResult> Search(string term)
-        //{
-        //    if (string.IsNullOrWhiteSpace(term))
-        //    {
-        //        var allMovies = await _context.Movies.ToListAsync();
-
-        //        return Ok(new
-        //        {
-        //            message = "All movies",
-        //            data = allMovies
-        //        });
-        //    }
-
-        //    var movies = await _context.Movies
-        //        .Where(m => m.Series_Title.ToLower().Contains(term.ToLower()))
-        //        .ToListAsync();
-
-        //    if (movies.Any())
-        //    {
-        //        return Ok(new
-        //        {
-        //            message = "Movie found",
-        //            data = movies
-        //        });
-        //    }
-
-        //    return NotFound(new
-        //    {
-        //        message = "No movies found"
-        //    });
-        //}
-
 
         [HttpGet]
         [Route("movies")]
