@@ -3,8 +3,6 @@ import React, { Component } from 'react'
 export class MovieDetails extends Component {
     constructor(props) {
         super(props)
-
-
         this.state = {
             movie: {}
         }
@@ -12,66 +10,68 @@ export class MovieDetails extends Component {
 
     async componentDidMount() {
         const { id } = this.props.params;
-        console.log(id);
-        try {
-            const responce = await fetch(`http://localhost:5146/api/MovieList/getMovieById/${id}`)
-            if (responce.ok) {
-                const data = await responce.json();
-                console.log(data.data);
-                const movie = data.data;
-                this.setState({
-                    movie: movie
-                })
-            }
-        } catch (error) {
-            console.error(error)
+
+        const response = await fetch(
+            `http://localhost:5146/api/MovieList/getMovieById/${id}`
+        );
+
+        if (response.ok) {
+            const data = await response.json();
+            this.setState({ movie: data.data });
         }
     }
+
     render() {
+        const { movie } = this.state;
+
         return (
             <div>
-                {/* Hero Section */}
+
+                {/* HERO SECTION */}
                 <div
                     className="position-relative text-white"
                     style={{
-                        height: "500px",
-                        backgroundImage: `url(${this.state.movie.poster_Link})`,
-                        backgroundSize: "cover",
+                        height: "450px",
+                        backgroundImage: `url(${movie.poster_Link})`,
+                        backgroundRepeat: "no-repeat",
+    backgroundSize: "100%",
+
                         backgroundPosition: "center"
                     }}
                 >
+                    {/* dark overlay */}
                     <div
                         className="position-absolute top-0 start-0 w-100 h-100"
                         style={{
-                            background:
-                                "linear-gradient(to top, rgba(0,0,0,.95), rgba(0,0,0,.3))"
+                            background: "rgba(0,0,0,0.65)"
                         }}
                     />
 
-                    <div className="container h-100 d-flex align-items-end position-relative">
-                        <div className="pb-5">
-                            <h1 className="display-3 fw-bold">
-                                {this.state.movie.series_Title}
-                            </h1>
+                    {/* center content */}
+                    <div className="position-relative h-100 d-flex flex-column justify-content-center align-items-center text-center">
 
-                            <div className="d-flex flex-wrap gap-3 align-items-center">
-                                <span>{this.state.movie.released_Year}</span>
+                        <h1 className="fw-bold display-4">
+                            {movie.series_Title}
+                        </h1>
 
-                                <span className="badge bg-danger">
-                                    {this.state.movie.certificate}
-                                </span>
+                        <div className="d-flex gap-3 mt-2 align-items-center">
+                            <span>{movie.released_Year}</span>
 
-                                <span>{this.state.movie.runtime}</span>
+                            <span className="badge bg-danger">
+                                {movie.certificate}
+                            </span>
 
-                                <span>
-                                    ⭐ {Number(this.state.movie?.imdB_Rating).toFixed(2)}
-                                </span>
-                            </div>
+                            <span>{movie.runtime}</span>
+
+                            <span>
+                                ⭐ {Number(movie?.imdB_Rating || 0).toFixed(2)}
+                            </span>
                         </div>
                     </div>
                 </div>
 
-                {/* Movie Details */}
+                
+{/* Movie Details */}
                 <div className="container py-5">
                     <div className="row">
                         {/* Poster */}
@@ -160,3 +160,6 @@ export class MovieDetails extends Component {
 }
 
 export default MovieDetails
+
+
+
