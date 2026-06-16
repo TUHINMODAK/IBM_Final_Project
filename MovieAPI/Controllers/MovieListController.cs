@@ -51,15 +51,26 @@ namespace MovieAPI.Controllers
 
         [HttpGet]
         [Route("getAllMovies")]
-        public async Task<IActionResult> GetAllMovies([FromQuery]int pageNum,[FromQuery] int numOfData)
+        public async Task<IActionResult> GetAllMovies([FromQuery] int pageNum = 1, [FromQuery] int numOfData = 10)
         {
-            int pageNumber = pageNum;
-            int numberOfData = numOfData;
-            var movies=await _context.Movies.Skip((pageNum-1)*numberOfData).Take(numberOfData).ToListAsync();
+            if (pageNum < 1) pageNum = 1;
+            if (numOfData < 1) numOfData = 10;
+
+            int totalRecords = await _context.Movies.CountAsync();
+
+            var movies = await _context.Movies
+                .Skip((pageNum - 1) * numOfData)
+                .Take(numOfData)
+                .ToListAsync();
+
             return Ok(new
             {
-                message = "Data Fetched Succesfully",
-                data= movies
+                pageNumber = pageNum,
+                pageSize = numOfData,
+                totalRecords,
+                totalPages = (int)Math.Ceiling((double)totalRecords / numOfData),
+                message = "Data fetched successfully",
+                data = movies
             });
         }
 
