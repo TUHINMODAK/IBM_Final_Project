@@ -21,33 +21,32 @@ namespace MovieAPI.Controllers
         [Route("AddMovie")]
         public IActionResult AddMovie(MovieList movie)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new
+                {
+                    message = "Invalid Input"
+                });
+            }
+
+            try
             {
                 _context.Movies.Add(movie);
-                int rows = _context.SaveChanges();
-                if (rows > 0)
-                {
-                    return StatusCode(201, new
-                    {
-                        message = "Data Added Successfully",
-                        data = movie
-                    });
-                }
-                else
-                {
-                    return StatusCode(500, new
-                    {
-                        message = "Something went wrong"
-                    });
-                }
+                _context.SaveChanges();
 
-
+                return Created("", new
+                {
+                    message = "Movie added successfully.",
+                    data = movie
+                });
             }
-            return StatusCode(400, new
+            catch (DbUpdateException)
             {
-                message = "Invalid Input",
-                data = ModelState.ValidationState
-            });
+                return Conflict(new
+                {
+                    message = "Movie already exists."
+                });
+            }
         }
 
         [HttpGet]
