@@ -240,7 +240,7 @@ namespace MovieAPI.Controllers
     [FromQuery] string? certificate = null)
         {
             if (pageNum < 1) pageNum = 1;
-            if (numOfData < 1) numOfData = 10;
+            if (numOfData < 1) numOfData = 12;
 
             var query = _context.Movies.AsQueryable();
 
