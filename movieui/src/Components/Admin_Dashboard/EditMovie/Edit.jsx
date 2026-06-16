@@ -58,7 +58,8 @@ export class Edit extends Component {
   };
 
   handleSubmit = async (e) => {
-    e.preventDefault();
+      e.preventDefault();
+     const token = localStorage.getItem("token");
 
     const movie = {
       id: this.state.movieId,
@@ -80,7 +81,8 @@ export class Edit extends Component {
         {
           method: "PUT",
           headers: {
-            "Content-Type": "application/json",
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
           },
           body: JSON.stringify(movie),
         }

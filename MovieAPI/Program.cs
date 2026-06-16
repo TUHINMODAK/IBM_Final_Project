@@ -63,8 +63,8 @@ namespace MovieAPI
                 app.UseSwaggerUI();
             }
             app.UseCors("AllowReactApp");
+            app.UseAuthentication();   // First
             app.UseAuthorization();
-            app.UseAuthentication();
 
             app.MapControllers();
 
