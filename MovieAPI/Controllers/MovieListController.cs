@@ -229,14 +229,24 @@ namespace MovieAPI.Controllers
 
 
         [HttpGet]
-        [Route("filterMovies")]
-        public async Task<IActionResult> FilterMovies(string? genre, int? year, double? minRating)
+        [Route("movies")]
+        public async Task<IActionResult> GetMovies(
+    [FromQuery] int pageNum = 1,
+    [FromQuery] int numOfData = 10,
+    [FromQuery] string? genre = null,
+    [FromQuery] int? year = null,
+    [FromQuery] double? minRating = null,
+    [FromQuery] string? certificate = null)
         {
+            if (pageNum < 1) pageNum = 1;
+            if (numOfData < 1) numOfData = 10;
+
             var query = _context.Movies.AsQueryable();
 
             if (!string.IsNullOrEmpty(genre))
             {
-                query = query.Where(m => m.Genre.ToLower().Contains(genre.ToLower()) );
+                query = query.Where(m =>
+                    m.Genre.ToLower().Contains(genre.ToLower()));
             }
 
             if (year.HasValue)
@@ -249,10 +259,28 @@ namespace MovieAPI.Controllers
                 query = query.Where(m => m.IMDB_Rating >= minRating);
             }
 
-            var movies = await query.ToListAsync();
+            if (!string.IsNullOrEmpty(certificate))
+            {
+                query = query.Where(m =>
+                    m.Certificate != null &&
+                    m.Certificate.Trim().ToLower().Contains(certificate.Trim().ToLower()));
+            }
+
+            
+            int totalRecords = await query.CountAsync();
+
+          
+            var movies = await query
+                .Skip((pageNum - 1) * numOfData)
+                .Take(numOfData)
+                .ToListAsync();
 
             return Ok(new
             {
+                pageNumber = pageNum,
+                pageSize = numOfData,
+                totalRecords,
+                totalPages = (int)Math.Ceiling((double)totalRecords / numOfData),
                 count = movies.Count,
                 data = movies
             });
